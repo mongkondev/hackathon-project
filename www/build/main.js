@@ -55878,12 +55878,16 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var HomePage = (function () {
     function HomePage(navCtrl) {
         this.navCtrl = navCtrl;
+        this.items = [];
+        this.items = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9
+        ];
     }
     return HomePage;
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Home</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <h2>Welcome to Ionic!</h2>\n\n  <p>\n\n    This starter project comes with simple tabs-based layout for apps\n\n    that are going to primarily use a Tabbed UI.\n\n  </p>\n\n  <p>\n\n    Take a look at the <code>src/pages/</code> directory to add or change tabs,\n\n    update any existing page or create new pages.\n\n  </p>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Product</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <ion-card class="product-card" *ngFor="let item of items">\n\n    <div style="position: relative">\n\n      <img src="https://placeimg.com/200/200/any">\n\n      <ion-fab right top>\n\n        <button ion-fab>\n\n          <ion-icon name="pin"></ion-icon>\n\n        </button>\n\n      </ion-fab>\n\n    </div>\n\n\n\n    <ion-item class="detail">\n\n      <h2>item name</h2>\n\n      <p>ไชโย อ่างทอง (3.1 Km)</p>\n\n    </ion-item>\n\n\n\n    <ion-item class="detail-footer">\n\n      <span item-left><p class="price">฿ 10,000</p></span>\n\n      <button ion-button icon-left clear item-end>\n\n        <ion-icon name="chatboxes"></ion-icon>\n\n        Contact\n\n      </button>\n\n    </ion-item>\n\n\n\n  </ion-card>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
 ], HomePage);
@@ -55896,9 +55900,9 @@ HomePage = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__about_about__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__contact_contact__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__home_home__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell_sell__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__setting_setting__ = __webpack_require__(265);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -55915,14 +55919,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var TabsPage = (function () {
     function TabsPage() {
-        this.tab1Root = __WEBPACK_IMPORTED_MODULE_3__home_home__["a" /* HomePage */];
-        this.tab2Root = __WEBPACK_IMPORTED_MODULE_1__about_about__["a" /* AboutPage */];
-        this.tab3Root = __WEBPACK_IMPORTED_MODULE_2__contact_contact__["a" /* ContactPage */];
+        this.tab1Root = __WEBPACK_IMPORTED_MODULE_1__home_home__["a" /* HomePage */];
+        this.tab2Root = __WEBPACK_IMPORTED_MODULE_2__sell_sell__["a" /* SellPage */];
+        this.tab3Root = __WEBPACK_IMPORTED_MODULE_3__setting_setting__["a" /* SettingPage */];
     }
     return TabsPage;
 }());
 TabsPage = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <ion-tab [root]="tab1Root" tabTitle="Home" tabIcon="home"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="About" tabIcon="information-circle"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="Contact" tabIcon="contacts"></ion-tab>\n\n</ion-tabs>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\tabs\tabs.html"*/
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <ion-tab [root]="tab1Root" tabTitle="Product" tabIcon="cube"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="Sell" tabIcon="logo-usd"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="Setting" tabIcon="settings" tabBadge="3"></ion-tab>\n\n</ion-tabs>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\tabs\tabs.html"*/
     }),
     __metadata("design:paramtypes", [])
 ], TabsPage);
@@ -74311,8 +74315,10 @@ webpackEmptyContext.id = 194;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__ = __webpack_require__(99);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_home_home__ = __webpack_require__(100);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__ = __webpack_require__(101);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(104);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_sell_sell__ = __webpack_require__(264);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_setting_setting__ = __webpack_require__(265);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_status_bar__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_splash_screen__ = __webpack_require__(104);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -74330,6 +74336,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+
+
+var pages = [
+    __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
+    __WEBPACK_IMPORTED_MODULE_4__pages_about_about__["a" /* AboutPage */],
+    __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__["a" /* ContactPage */],
+    __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */],
+    __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */],
+    __WEBPACK_IMPORTED_MODULE_8__pages_sell_sell__["a" /* SellPage */],
+    __WEBPACK_IMPORTED_MODULE_9__pages_setting_setting__["a" /* SettingPage */]
+];
 var AppModule = (function () {
     function AppModule() {
     }
@@ -74337,28 +74354,16 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["a" /* NgModule */])({
-        declarations: [
-            __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_4__pages_about_about__["a" /* AboutPage */],
-            __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__["a" /* ContactPage */],
-            __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */]
-        ],
+        declarations: pages.slice(),
         imports: [
             __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser__["a" /* BrowserModule */],
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */])
         ],
         bootstrap: [__WEBPACK_IMPORTED_MODULE_2_ionic_angular__["b" /* IonicApp */]],
-        entryComponents: [
-            __WEBPACK_IMPORTED_MODULE_3__app_component__["a" /* MyApp */],
-            __WEBPACK_IMPORTED_MODULE_4__pages_about_about__["a" /* AboutPage */],
-            __WEBPACK_IMPORTED_MODULE_5__pages_contact_contact__["a" /* ContactPage */],
-            __WEBPACK_IMPORTED_MODULE_6__pages_home_home__["a" /* HomePage */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_tabs_tabs__["a" /* TabsPage */]
-        ],
+        entryComponents: pages.slice(),
         providers: [
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_10__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_11__ionic_native_splash_screen__["a" /* SplashScreen */],
             { provide: __WEBPACK_IMPORTED_MODULE_0__angular_core__["b" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] }
         ]
     })
@@ -112054,6 +112059,75 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
 //# sourceMappingURL=main.js.map
+
+/***/ }),
+/* 264 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SellPage; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SellPage = (function () {
+    function SellPage(navCtrl) {
+        this.navCtrl = navCtrl;
+    }
+    return SellPage;
+}());
+SellPage = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+        selector: 'page-sell',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\sell\sell.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Sell\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n     <ion-grid style="height: 100%;justify-content: center;">\n\n        <ion-row>\n\n        <ion-col text-center>\n\n            <button ion-button full>Sign In</button>\n\n        </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\sell\sell.html"*/
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
+], SellPage);
+
+//# sourceMappingURL=sell.js.map
+
+/***/ }),
+/* 265 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(34);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return SettingPage; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+var SettingPage = (function () {
+    function SettingPage(navCtrl) {
+        this.navCtrl = navCtrl;
+    }
+    return SettingPage;
+}());
+SettingPage = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
+        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\setting\setting.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Setting\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n  <ion-grid style="height: 100%;justify-content: center;">\n\n      <ion-row>\n\n      <ion-col text-center>\n\n          <button ion-button full>Sign In</button>\n\n      </ion-col>\n\n      </ion-row>\n\n  </ion-grid>\n\n\n\n  <ion-list *ngIf="false">\n\n    <button ion-item>\n\n      Profile\n\n    </button>\n\n    <button ion-item>\n\n      Notification\n\n      <ion-badge item-end>10</ion-badge>\n\n    </button>\n\n    <button ion-item>\n\n      My Product\n\n      <ion-badge item-end color="light">10</ion-badge>\n\n    </button>\n\n    <button ion-item>\n\n      Sign Out\n\n    </button>\n\n  </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\setting\setting.html"*/
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object])
+], SettingPage);
+
+var _a;
+//# sourceMappingURL=setting.js.map
 
 /***/ })
 /******/ ]);

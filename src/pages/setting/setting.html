@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Setting
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid style="height: 100%;justify-content: center;">
+      <ion-row>
+      <ion-col text-center>
+          <button ion-button full>Sign In</button>
+      </ion-col>
+      </ion-row>
+  </ion-grid>
+
+  <ion-list *ngIf="false">
+    <button ion-item>
+      Profile
+    </button>
+    <button ion-item>
+      Notification
+      <ion-badge item-end>10</ion-badge>
+    </button>
+    <button ion-item>
+      My Product
+      <ion-badge item-end color="light">10</ion-badge>
+    </button>
+    <button ion-item>
+      Sign Out
+    </button>
+  </ion-list>
+
+</ion-content>
