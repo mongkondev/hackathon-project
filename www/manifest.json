@@ -3,6 +3,7 @@
   "short_name": "Sell Fetch",
   "start_url": "index.html",
   "display": "standalone",
+  "orientation": "portrait",
   "icons": [
       {
           "src": "assets/icon/android-chrome-192x192.png",

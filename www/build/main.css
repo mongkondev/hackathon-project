@@ -24745,3 +24745,7 @@ page-home .product-card .price {
   font-weight: bold;
   color: #F60;
 }
+
+page-sell ion-icon {
+  margin-right: 5px;
+}

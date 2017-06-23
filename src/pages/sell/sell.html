@@ -3,17 +3,89 @@
     <ion-title>
       Sell
     </ion-title>
+
+    <ion-buttons end>
+        <button ion-button (click)="save()">Save</button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 
-     <ion-grid style="height: 100%;justify-content: center;">
+    <ion-grid style="height: 100%;justify-content: center;" *ngIf="showSignInButton">
         <ion-row>
         <ion-col text-center>
-            <button ion-button full>Sign In</button>
+            <div>
+                <img src="assets/noto-emoji/png/128/emoji_u2639.png" alt="">
+            </div>
+            <button ion-button (click)="signIn()">Sign In</button>
         </ion-col>
         </ion-row>
     </ion-grid>
+
+    <div *ngIf="!showSignInButton">
+        <ion-grid style="padding: 0px;">
+            <ion-row>
+                <ion-col text-center>
+                    <img src="https://placeimg.com/200/200/any">
+                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
+                </ion-col>
+                <ion-col text-center>
+                    <img src="https://placeimg.com/200/200/any">
+                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col text-center>
+                    <img src="https://placeimg.com/200/200/any">
+                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
+                </ion-col>
+                <ion-col text-center>
+                    <img src="https://placeimg.com/200/200/any">
+                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col text-center>
+                    <img src="https://placeimg.com/200/200/any">
+                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
+                </ion-col>
+                <ion-col text-center>
+                    <img src="https://placeimg.com/200/200/any">
+                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        
+        <button ion-button full><ion-icon name="ios-camera"></ion-icon>  Add Picture</button>
+
+        <ion-list>
+
+            <ion-item>
+                <ion-label stacked>Title</ion-label>
+                <ion-input type="text" [(ngModel)]="data.title"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Description</ion-label>
+                <ion-textarea [(ngModel)]="data.description"></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                Location
+                <p item-end>Bangkok Thailand</p>
+                <button ion-button clear item-end icon-left>
+                    <ion-icon name="md-close"></ion-icon>
+                </button>
+                <button ion-button item-end icon-left *ngIf="false">
+                    <ion-icon name="md-locate"></ion-icon>
+                    Check In
+                </button>
+            </ion-item>
+
+        </ion-list>
+
+    </div>
 
 </ion-content>
