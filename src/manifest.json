@@ -1,13 +1,20 @@
 {
-  "name": "Ionic",
-  "short_name": "Ionic",
+  "name": "Sell Fetch (Exzcute Team)",
+  "short_name": "Sell Fetch",
   "start_url": "index.html",
   "display": "standalone",
-  "icons": [{
-    "src": "assets/imgs/logo.png",
-    "sizes": "512x512",
-    "type": "image/png"
-  }],
+  "icons": [
+      {
+          "src": "assets/icon/android-chrome-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+      },
+      {
+          "src": "assets/icon/android-chrome-512x512.png",
+          "sizes": "512x512",
+          "type": "image/png"
+      }
+  ],
   "background_color": "#4e8ef7",
   "theme_color": "#4e8ef7"
 }
