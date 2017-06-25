@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, LoadingController } from 'ionic-angular';
+import { NavController, AlertController, LoadingController, Events } from 'ionic-angular';
 import FirebaseLib from '../../services/firebaseLib';
 
 declare var _;
@@ -26,16 +26,28 @@ export class SellPage {
     constructor(
         public navCtrl: NavController,
         public alertCtrl: AlertController,
-        public loadCtrl: LoadingController
+        public loadCtrl: LoadingController,
+        public event: Events
     ) {
-        
-        var user = firebase.auth().currentUser;
-        if(!user){
-            this.showSignInButton = true
-        }
+
+        this.getAuth()
+
+        this.event.subscribe("firebase:logedIn", ()=>{
+            console.log("has firebase:logedIn in sell")
+            this.getAuth()
+        })
 
         //this.getLocation();
 
+    }
+
+    getAuth(){
+        var user = firebase.auth().currentUser;
+        if(!user){
+            this.showSignInButton = true
+        }else{
+           this.showSignInButton = false 
+        }
     }
 
     getLocation() {
@@ -74,85 +86,6 @@ export class SellPage {
         //return new Promise((resolve, reject) => {
 
             let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latlng+'&sensor=true&language=th&region=TH&key=AIzaSyACgG6fqREwXMyCRYi1no8i_xS8HECFsC8'
-
-            // var observabe = this.http.get(url)
-            // .map(res => res.json())
-            // .subscribe(
-            // res=>{
-
-            //     let resultObj = {}
-
-            //     if(res.results[0]){
-
-            //         if(res.results[0].address_components){
-
-            //             _.each(res.results[0].address_components, address_component=>{
-
-            //                 var hasStreetNumber = _.find(address_component.types, o=>o=="street_number")
-
-            //                 if(hasStreetNumber){
-            //                     if(resultObj['address.address']) return
-            //                     return resultObj['address.address'] = address_component.long_name.split(" ")[0]
-            //                 }
-
-            //                 var hasRoute = _.find(address_component.types, o=>o=="route")
-
-            //                 if(hasRoute){
-
-            //                     if(resultObj['address.street']) return
-            //                     return resultObj['address.street'] = address_component.long_name
-            //                 }
-
-            //                 if(_.isString(address_component.long_name)){
-
-            //                     var hasSubDistrict = address_component.long_name.substring(0, 4)=="ตำบล" || address_component.long_name.substring(0, 4)=="แขวง"
-
-            //                     if(hasSubDistrict){
-            //                         if(resultObj['address.sub_district']) return
-            //                         return resultObj['address.sub_district'] = address_component.long_name
-            //                     }
-
-            //                     var hasDistrict = address_component.long_name.substring(0, 5)=="อำเภอ" || address_component.long_name.substring(0, 3)=="เขต"
-
-            //                     if(hasDistrict){
-            //                         if(resultObj['address.district']) return
-            //                         return resultObj['address.district'] = address_component.long_name
-            //                     }
-
-            //                 }
-
-            //                 var hasProvince = _.find(address_component.types, o=>o=="administrative_area_level_1")
-
-            //                 if(hasProvince){
-            //                     if(resultObj['address.province']) return
-            //                     return resultObj['address.province'] = address_component.long_name
-            //                 }
-
-            //                 var hasPostalCode = _.find(address_component.types, o=>o=="postal_code")
-
-            //                 if(hasPostalCode){
-            //                     if(resultObj['address.zipcode']) return
-            //                     return resultObj['address.zipcode'] = address_component.long_name
-            //                 }
-
-
-            //             })
-
-                        
-            //         }
-
-            //     }
-
-            //     resolve(resultObj)
-            //     this.data.location=resultObj;
-            //     this.data.latlng = latlng;
-
-            // },
-            // err=>{
-
-            //     reject()
-
-            // })
 
             $.ajax({
                 url: url,
@@ -390,6 +323,7 @@ export class SellPage {
             alert.present();
             
             this.showSignInButton = false
+            this.event.publish("firebase:logedIn")
             
         })
     }

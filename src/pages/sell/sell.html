@@ -4,7 +4,7 @@
       Sell
     </ion-title>
 
-    <ion-buttons end>
+    <ion-buttons end *ngIf="!showSignInButton">
         <button ion-button (click)="save()">Save</button>
     </ion-buttons>
 

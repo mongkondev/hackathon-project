@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Events, AlertController } from 'ionic-angular';
 import FirebaseLib from '../../services/firebaseLib';
 
 declare var firebase;
@@ -12,13 +12,28 @@ export class SettingPage {
 
     showSignInButton = false
 
-    constructor(public navCtrl: NavController) {
-            
+    constructor(
+        public navCtrl: NavController,
+        public event: Events,
+        public alertCtrl: AlertController,
+    ) {
+
+        this.event.subscribe("firebase:logedIn", ()=>{
+            console.log("has firebase:logedIn in setting")
+            this.getAuth()
+        })
+
+        this.getAuth()
+
+    }
+
+    getAuth(){
         var user = firebase.auth().currentUser;
         if(!user){
             this.showSignInButton = true
+        }else{
+            this.showSignInButton = false
         }
-
     }
 
     signOut(){
@@ -30,8 +45,22 @@ export class SettingPage {
     }
 
     signIn(){
+
         FirebaseLib.signInGoogle().then((result) => {
+
             this.showSignInButton = false
+            var user = result.user;
+            
+            let alert = this.alertCtrl.create({
+                title: 'Wellcome',
+                subTitle: 'Wellcome ' + user.displayName,
+                buttons: ['OK']
+            });
+            alert.present();
+            
+            this.showSignInButton = false
+            this.event.publish("firebase:logedIn")
+            
         })
     }
 
