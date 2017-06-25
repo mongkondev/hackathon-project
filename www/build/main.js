@@ -55850,6 +55850,18 @@ var ContactPage = (function () {
         }
         this.data.productId = this.item._id;
         this.data.created_at = firebase.database.ServerValue.TIMESTAMP;
+        $.ajax({
+            url: 'https://us-central1-hackathon-project-85df6.cloudfunctions.net/sendNotification',
+            type: 'POST',
+            data: JSON.stringify({
+                "targetUid": this.item.uid,
+                "title": this.data.name + " contact you.",
+                "body": this.data.description
+            }),
+            contentType: "application/x-www-form-urlencoded",
+        })
+            .done(function (res) {
+        });
         userNotify.push(this.data).then(function () {
             _this.data = {
                 mobile_phone: null,
@@ -55873,11 +55885,10 @@ ContactPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'page-contact',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\contact\contact.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Contact\n\n    </ion-title>\n\n\n\n    <ion-buttons end>\n\n        <button ion-button (click)="save()">Send</button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n\n\n    <ion-item>\n\n        <ion-label stacked>Name</ion-label>\n\n        <ion-input type="text" [(ngModel)]="data.name"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n        <ion-label stacked>Email</ion-label>\n\n        <ion-input type="text" [(ngModel)]="data.email"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n        <ion-label stacked>Mobile Phone Number</ion-label>\n\n        <ion-input type="text" [(ngModel)]="data.mobile_phone"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n        <ion-label stacked>Description</ion-label>\n\n        <ion-textarea [(ngModel)]="data.description"></ion-textarea>\n\n    </ion-item>\n\n\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\contact\contact.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _c || Object])
 ], ContactPage);
 
+var _a, _b, _c;
 //# sourceMappingURL=contact.js.map
 
 /***/ }),
