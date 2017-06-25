@@ -35,6 +35,8 @@ export class SellPage {
             this.showSignInButton = true
         }
 
+        this.getLocation();
+
     }
     getLocation() {
         if (navigator.geolocation) {
