@@ -30,7 +30,7 @@
 
     <ion-item class="detail">
       <h2>{{item.title}}</h2>
-      <!--<p>ไชโย อ่างทอง (3.1 Km)</p>-->
+      <p *ngIf="item.location">{{item.location.district}} {{item.location.province}}</p>
     </ion-item>
 
     <ion-item class="detail-footer">
