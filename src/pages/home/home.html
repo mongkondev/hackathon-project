@@ -15,44 +15,11 @@
       </ion-row>
   </ion-grid>
 
-  <ion-list [virtualScroll]="items">
 
-    <ion-card class="product-card" *virtualItem="let item">
-      <div style="position: relative">
-        <img *ngIf="item.thumbnail" [src]="item.thumbnail">
-        <ion-fab right top>
-          <button ion-fab>
-            <ion-icon name="pin"></ion-icon>
-          </button>
-        </ion-fab>
-      </div>
-
-      <ion-item class="detail">
-        <h2>{{item.title}}</h2>
-        <!--<p>ไชโย อ่างทอง (3.1 Km)</p>-->
-      </ion-item>
-
-      <ion-item class="detail-footer">
-        <span item-left><p class="price">฿ {{item.price ? numberFormat(item.price) : 'ไม่ระบุ'}}</p></span>
-        <button ion-button icon-left clear item-end>
-          <ion-icon name="chatboxes"></ion-icon>
-          Contact
-        </button>
-      </ion-item>
-
-    </ion-card>
-
-  </ion-list>
-  
-  <!--<ion-card class="product-card" *ngFor="let item of items">
+  <ion-card class="product-card" *ngFor="let item of items">
     <div style="position: relative">
       <div class="image">
-        <div *ngIf="item.images">
-          <img *ngIf="item.images[0]" [src]="item.images[0]">
-        </div>
-        <div *ngIf="!item.images">
-          <img src="assets/img/no_image_thumb.gif">
-        </div>
+        <img *ngIf="item.thumbnail" [src]="item.thumbnail">
       </div>
       <ion-fab right top>
         <button ion-fab>
@@ -63,7 +30,7 @@
 
     <ion-item class="detail">
       <h2>{{item.title}}</h2>
-      <p>ไชโย อ่างทอง (3.1 Km)</p>
+      <!--<p>ไชโย อ่างทอง (3.1 Km)</p>-->
     </ion-item>
 
     <ion-item class="detail-footer">
@@ -74,6 +41,6 @@
       </button>
     </ion-item>
 
-  </ion-card>-->
+  </ion-card>
 
 </ion-content>
