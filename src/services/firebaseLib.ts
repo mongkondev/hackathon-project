@@ -21,9 +21,13 @@ export default {
             data.price = parseInt(data.price)
         }
 
+        data.uid = user.uid
+
         var newProductsKey =  products.push(data).key
 
         var userProducts = firebase.database().ref('userProducts/'+user.uid+'/'+newProductsKey);
+
+        userProducts.set(true)
 
     },
     signInGoogle(){
@@ -70,6 +74,67 @@ export default {
 
         return Promise.all(ps)
         
+    },
+    countProducts(){
+        return new Promise(function(resolve, reject) {
+            resolve(1)
+        })
+    },
+    updateProfile(){
+
+        var user = firebase.auth().currentUser;
+
+        var userRef = firebase.database().ref('userProfile/' + user.uid)
+
+        userRef.set({
+            displayName : user.displayName,
+            email : user.email
+        })
+
+        const messaging = firebase.messaging();
+
+        messaging.requestPermission()
+        .then(function() {
+
+            console.log('Notification permission granted.');
+            // TODO(developer): Retrieve an Instance ID token for use with FCM.
+            // ...
+
+            messaging.getToken()
+            .then(function(currentToken) {
+            if (currentToken) {
+                console.log('currentToken : ', currentToken);
+
+                var userRef = firebase.database().ref('userFcm/' + user.uid)
+                userRef.set(currentToken)
+
+                //sendTokenToServer(currentToken);
+                //updateUIForPushEnabled(currentToken);
+            } else {
+                // Show permission request.
+                console.log('No Instance ID token available. Request permission to generate one.');
+                // Show permission UI.
+                //updateUIForPushPermissionRequired();
+                //setTokenSentToServer(false);
+            }
+            })
+            .catch(function(err) {
+            console.log('An error occurred while retrieving token. ', err);
+            //showToken('Error retrieving Instance ID token. ', err);
+            //setTokenSentToServer(false);
+            });
+
+        })
+        .catch(function(err) {
+            console.log('Unable to get permission to notify.', err);
+        });
+        
+        /*.on('value', (snapshot) => {
+            if(snapshot.val()){
+                this.countProducts = Object.keys(snapshot.val()).length
+            }
+        });*/
+
     }
 
 }

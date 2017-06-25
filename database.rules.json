@@ -4,6 +4,23 @@
       ".read": true,
       ".write": "auth != null"
     },
-    ".write": "auth != null"
+    "userProducts" : {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+      	".write": "$uid === auth.uid"
+      }
+    },
+    "userProfile" : {
+      "$uid": {
+      	".read": true,
+      	".write": "$uid === auth.uid"
+      }
+    },
+    "userFcm" : {
+      "$uid": {
+        ".read": "$uid === auth.uid",
+      	".write": "$uid === auth.uid"
+      }
+    }
   }
 }

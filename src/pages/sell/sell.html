@@ -4,7 +4,7 @@
       Sell
     </ion-title>
 
-    <ion-buttons end>
+    <ion-buttons end *ngIf="!showSignInButton">
         <button ion-button (click)="save()">Save</button>
     </ion-buttons>
 
@@ -61,11 +61,11 @@
 
             <ion-item>
                 Location
-                <p item-end>Bangkok Thailand</p>
-                <button ion-button clear item-end icon-left>
+                <p item-end *ngIf="data.location">{{data.location.district}} {{data.location.province}}</p>
+                <button ion-button clear item-end icon-left *ngIf="data.location" (click)="clearLocation()">
                     <ion-icon name="md-close"></ion-icon>
                 </button>
-                <button ion-button item-end icon-left *ngIf="false">
+                <button ion-button item-end icon-left *ngIf="!data.location" (click)="getLocation()">
                     <ion-icon name="md-locate"></ion-icon>
                     Check In
                 </button>
