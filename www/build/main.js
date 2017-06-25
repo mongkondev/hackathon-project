@@ -55846,12 +55846,12 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Product</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid style="height: 100%;justify-content: center;" *ngIf="items.length == 0">\n\n      <ion-row>\n\n      <ion-col text-center>\n\n        <img src="assets/noto-emoji/png/128/emoji_u1f617.png">\n\n        <div>Product not available!</div>\n\n      </ion-col>\n\n      </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n  <ion-card class="product-card" *ngFor="let item of items">\n\n    <div style="position: relative">\n\n      <div class="image">\n\n        <img *ngIf="item.thumbnail" [src]="item.thumbnail">\n\n      </div>\n\n      <ion-fab right top>\n\n        <button ion-fab>\n\n          <ion-icon name="pin"></ion-icon>\n\n        </button>\n\n      </ion-fab>\n\n    </div>\n\n\n\n    <ion-item class="detail">\n\n      <h2>{{item.title}}</h2>\n\n      <!--<p>ไชโย อ่างทอง (3.1 Km)</p>-->\n\n    </ion-item>\n\n\n\n    <ion-item class="detail-footer">\n\n      <span item-left><p class="price">฿ {{item.price ? numberFormat(item.price) : \'ไม่ระบุ\'}}</p></span>\n\n      <button ion-button icon-left clear item-end>\n\n        <ion-icon name="chatboxes"></ion-icon>\n\n        Contact\n\n      </button>\n\n    </ion-item>\n\n\n\n  </ion-card>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/Volumes/Data/www/hackathon-project/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Product</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n  <ion-grid style="height: 100%;justify-content: center;" *ngIf="items.length == 0">\n      <ion-row>\n      <ion-col text-center>\n        <img src="assets/noto-emoji/png/128/emoji_u1f617.png">\n        <div>Product not available!</div>\n      </ion-col>\n      </ion-row>\n  </ion-grid>\n\n\n  <ion-card class="product-card" *ngFor="let item of items">\n    <div style="position: relative">\n      <div class="image">\n        <img *ngIf="item.thumbnail" [src]="item.thumbnail">\n      </div>\n      <ion-fab right top>\n        <button ion-fab>\n          <ion-icon name="pin"></ion-icon>\n        </button>\n      </ion-fab>\n    </div>\n\n    <ion-item class="detail">\n      <h2>{{item.title}}</h2>\n      <!--<p>ไชโย อ่างทอง (3.1 Km)</p>-->\n    </ion-item>\n\n    <ion-item class="detail-footer">\n      <span item-left><p class="price">฿ {{item.price ? numberFormat(item.price) : \'ไม่ระบุ\'}}</p></span>\n      <button ion-button icon-left clear item-end>\n        <ion-icon name="chatboxes"></ion-icon>\n        Contact\n      </button>\n    </ion-item>\n\n  </ion-card>\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/www/hackathon-project/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _b || Object])
 ], HomePage);
 
+var _a, _b;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
@@ -55885,13 +55885,88 @@ var SellPage = (function () {
         this.data = {
             title: null,
             description: null,
-            price: null
+            price: null,
+            location: null,
         };
         var user = firebase.auth().currentUser;
         if (!user) {
             this.showSignInButton = true;
         }
     }
+    SellPage.prototype.getLocation = function () {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(this.showPosition);
+        }
+        else {
+            var alert = this.alertCtrl.create({
+                title: 'Alert',
+                subTitle: 'Geolocation is not supported by this browser.',
+                buttons: ['OK']
+            });
+            alert.present();
+        }
+    };
+    SellPage.prototype.showPosition = function (position) {
+        this.getGeocode(position.coords.latitude + "," + position.coords.longitud);
+    };
+    SellPage.prototype.getGeocode = function (latlng) {
+        var _this = this;
+        return new Promise(function (resolve, reject) {
+            var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng + '&sensor=true&language=th&region=TH&key=AIzaSyACgG6fqREwXMyCRYi1no8i_xS8HECFsC8';
+            var observabe = _this.http.get(url)
+                .map(function (res) { return res.json(); })
+                .subscribe(function (res) {
+                var resultObj = {};
+                if (res.results[0]) {
+                    if (res.results[0].address_components) {
+                        _.each(res.results[0].address_components, function (address_component) {
+                            var hasStreetNumber = _.find(address_component.types, function (o) { return o == "street_number"; });
+                            if (hasStreetNumber) {
+                                if (resultObj['address.address'])
+                                    return;
+                                return resultObj['address.address'] = address_component.long_name.split(" ")[0];
+                            }
+                            var hasRoute = _.find(address_component.types, function (o) { return o == "route"; });
+                            if (hasRoute) {
+                                if (resultObj['address.street'])
+                                    return;
+                                return resultObj['address.street'] = address_component.long_name;
+                            }
+                            if (_.isString(address_component.long_name)) {
+                                var hasSubDistrict = address_component.long_name.substring(0, 4) == "ตำบล" || address_component.long_name.substring(0, 4) == "แขวง";
+                                if (hasSubDistrict) {
+                                    if (resultObj['address.sub_district'])
+                                        return;
+                                    return resultObj['address.sub_district'] = address_component.long_name;
+                                }
+                                var hasDistrict = address_component.long_name.substring(0, 5) == "อำเภอ" || address_component.long_name.substring(0, 3) == "เขต";
+                                if (hasDistrict) {
+                                    if (resultObj['address.district'])
+                                        return;
+                                    return resultObj['address.district'] = address_component.long_name;
+                                }
+                            }
+                            var hasProvince = _.find(address_component.types, function (o) { return o == "administrative_area_level_1"; });
+                            if (hasProvince) {
+                                if (resultObj['address.province'])
+                                    return;
+                                return resultObj['address.province'] = address_component.long_name;
+                            }
+                            var hasPostalCode = _.find(address_component.types, function (o) { return o == "postal_code"; });
+                            if (hasPostalCode) {
+                                if (resultObj['address.zipcode'])
+                                    return;
+                                return resultObj['address.zipcode'] = address_component.long_name;
+                            }
+                        });
+                    }
+                }
+                resolve(resultObj);
+            }, function (err) {
+                reject();
+            });
+        });
+    };
     SellPage.prototype.deleteFile = function (key) {
         var _this = this;
         var confirm = this.alertCtrl.create({
@@ -56007,13 +56082,12 @@ var SellPage = (function () {
 }());
 SellPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-sell',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\sell\sell.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Sell\n\n    </ion-title>\n\n\n\n    <ion-buttons end>\n\n        <button ion-button (click)="save()">Save</button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-grid style="height: 100%;justify-content: center;" *ngIf="showSignInButton">\n\n        <ion-row>\n\n        <ion-col text-center>\n\n            <div>\n\n                <img src="assets/noto-emoji/png/128/emoji_u2639.png" alt="">\n\n            </div>\n\n            <button ion-button (click)="signIn()">Sign In</button>\n\n        </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n    <div *ngIf="!showSignInButton">\n\n        <ion-grid style="padding: 0px;">\n\n\n\n            <ion-row *ngFor="let row of arrayToGrid(images, 2)">\n\n\n\n                <ion-col col-6 text-center *ngFor="let col of row; let i = index">\n\n                    <img [src]="col.data" style="height: 150px">\n\n                    <button ion-button color="danger" full (click)="deleteFile(i)"><ion-icon name="ios-trash"></ion-icon> Delete</button>\n\n                </ion-col>\n\n\n\n            </ion-row>\n\n\n\n        </ion-grid>\n\n\n\n        <input type="file" id="file" multiple accept="image/*" (change)="onChangeFileInput($event)" style="display:none">\n\n        \n\n        <button ion-button full (click)="addPicture()"><ion-icon name="ios-camera"></ion-icon>  Add Picture</button>\n\n\n\n        <ion-list>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>Title</ion-label>\n\n                <ion-input type="text" [(ngModel)]="data.title"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>Description</ion-label>\n\n                <ion-textarea [(ngModel)]="data.description"></ion-textarea>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>Price</ion-label>\n\n                <ion-input type="number" [(ngModel)]="data.price"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                Location\n\n                <p item-end>Bangkok Thailand</p>\n\n                <button ion-button clear item-end icon-left>\n\n                    <ion-icon name="md-close"></ion-icon>\n\n                </button>\n\n                <button ion-button item-end icon-left *ngIf="false">\n\n                    <ion-icon name="md-locate"></ion-icon>\n\n                    Check In\n\n                </button>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\sell\sell.html"*/
+        selector: 'page-sell',template:/*ion-inline-start:"/Volumes/Data/www/hackathon-project/src/pages/sell/sell.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Sell\n    </ion-title>\n\n    <ion-buttons end>\n        <button ion-button (click)="save()">Save</button>\n    </ion-buttons>\n\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n    <ion-grid style="height: 100%;justify-content: center;" *ngIf="showSignInButton">\n        <ion-row>\n        <ion-col text-center>\n            <div>\n                <img src="assets/noto-emoji/png/128/emoji_u2639.png" alt="">\n            </div>\n            <button ion-button (click)="signIn()">Sign In</button>\n        </ion-col>\n        </ion-row>\n    </ion-grid>\n\n    <div *ngIf="!showSignInButton">\n        <ion-grid style="padding: 0px;">\n\n            <ion-row *ngFor="let row of arrayToGrid(images, 2)">\n\n                <ion-col col-6 text-center *ngFor="let col of row; let i = index">\n                    <img [src]="col.data" style="height: 150px">\n                    <button ion-button color="danger" full (click)="deleteFile(i)"><ion-icon name="ios-trash"></ion-icon> Delete</button>\n                </ion-col>\n\n            </ion-row>\n\n        </ion-grid>\n\n        <input type="file" id="file" multiple accept="image/*" (change)="onChangeFileInput($event)" style="display:none">\n        \n        <button ion-button full (click)="addPicture()"><ion-icon name="ios-camera"></ion-icon>  Add Picture</button>\n\n        <ion-list>\n\n            <ion-item>\n                <ion-label stacked>Title</ion-label>\n                <ion-input type="text" [(ngModel)]="data.title"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                <ion-label stacked>Description</ion-label>\n                <ion-textarea [(ngModel)]="data.description"></ion-textarea>\n            </ion-item>\n\n            <ion-item>\n                <ion-label stacked>Price</ion-label>\n                <ion-input type="number" [(ngModel)]="data.price"></ion-input>\n            </ion-item>\n\n            <ion-item>\n                Location\n                <p item-end>Bangkok Thailand</p>\n                <button ion-button clear item-end icon-left>\n                    <ion-icon name="md-close"></ion-icon>\n                </button>\n                <button ion-button item-end icon-left *ngIf="false">\n                    <ion-icon name="md-locate"></ion-icon>\n                    Check In\n                </button>\n            </ion-item>\n\n        </ion-list>\n\n    </div>\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/www/hackathon-project/src/pages/sell/sell.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* AlertController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _c || Object])
 ], SellPage);
 
+var _a, _b, _c;
 //# sourceMappingURL=sell.js.map
 
 /***/ }),
@@ -56056,7 +56130,7 @@ var SettingPage = (function () {
 }());
 SettingPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\setting\setting.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Setting\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n  <ion-grid style="height: 100%;justify-content: center;" *ngIf="showSignInButton">\n\n      <ion-row>\n\n      <ion-col text-center>\n\n          <div>\n\n              <img src="assets/noto-emoji/png/128/emoji_u2639.png" alt="">\n\n          </div>\n\n          <button ion-button (click)="signIn()">Sign In</button>\n\n      </ion-col>\n\n      </ion-row>\n\n  </ion-grid>\n\n\n\n  <ion-list *ngIf="false">\n\n    <button ion-item>\n\n      Profile\n\n    </button>\n\n    <button ion-item>\n\n      Notification\n\n      <ion-badge item-end>10</ion-badge>\n\n    </button>\n\n    <button ion-item>\n\n      My Product\n\n      <ion-badge item-end color="light">10</ion-badge>\n\n    </button>\n\n    <button ion-item>\n\n      Sign Out\n\n    </button>\n\n  </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\setting\setting.html"*/
+        selector: 'page-setting',template:/*ion-inline-start:"/Volumes/Data/www/hackathon-project/src/pages/setting/setting.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Setting\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-grid style="height: 100%;justify-content: center;" *ngIf="showSignInButton">\n      <ion-row>\n      <ion-col text-center>\n          <div>\n              <img src="assets/noto-emoji/png/128/emoji_u2639.png" alt="">\n          </div>\n          <button ion-button (click)="signIn()">Sign In</button>\n      </ion-col>\n      </ion-row>\n  </ion-grid>\n\n  <ion-list *ngIf="false">\n    <button ion-item>\n      Profile\n    </button>\n    <button ion-item>\n      Notification\n      <ion-badge item-end>10</ion-badge>\n    </button>\n    <button ion-item>\n      My Product\n      <ion-badge item-end color="light">10</ion-badge>\n    </button>\n    <button ion-item>\n      Sign Out\n    </button>\n  </ion-list>\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/www/hackathon-project/src/pages/setting/setting.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
 ], SettingPage);
@@ -56095,7 +56169,7 @@ var TabsPage = (function () {
     return TabsPage;
 }());
 TabsPage = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <ion-tab [root]="tab1Root" tabTitle="Product" tabIcon="cube"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="Sell" tabIcon="logo-usd"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="Setting" tabIcon="settings" tabBadge="3"></ion-tab>\n\n</ion-tabs>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\tabs\tabs.html"*/
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({template:/*ion-inline-start:"/Volumes/Data/www/hackathon-project/src/pages/tabs/tabs.html"*/'<ion-tabs>\n  <ion-tab [root]="tab1Root" tabTitle="Product" tabIcon="cube"></ion-tab>\n  <ion-tab [root]="tab2Root" tabTitle="Sell" tabIcon="logo-usd"></ion-tab>\n  <ion-tab [root]="tab3Root" tabTitle="Setting" tabIcon="settings" tabBadge="3"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/Volumes/Data/www/hackathon-project/src/pages/tabs/tabs.html"*/
     }),
     __metadata("design:paramtypes", [])
 ], TabsPage);
@@ -74822,7 +74896,7 @@ var MyApp = (function () {
     return MyApp;
 }());
 MyApp = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\app\app.html"*/
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({template:/*ion-inline-start:"/Volumes/Data/www/hackathon-project/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/Volumes/Data/www/hackathon-project/src/app/app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
@@ -74856,7 +74930,7 @@ var AboutPage = (function () {
 }());
 AboutPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-about',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\about\about.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      About\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\about\about.html"*/
+        selector: 'page-about',template:/*ion-inline-start:"/Volumes/Data/www/hackathon-project/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      About\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/www/hackathon-project/src/pages/about/about.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
 ], AboutPage);
@@ -74890,7 +74964,7 @@ var ContactPage = (function () {
 }());
 ContactPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-contact',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\contact\contact.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Contact\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n  <ion-list>\n\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n\n    <ion-item>\n\n      <ion-icon name="ionic" item-left></ion-icon>\n\n      @ionicframework\n\n    </ion-item>\n\n  </ion-list>\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\contact\contact.html"*/
+        selector: 'page-contact',template:/*ion-inline-start:"/Volumes/Data/www/hackathon-project/src/pages/contact/contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n    <ion-item>\n      <ion-icon name="ionic" item-left></ion-icon>\n      @ionicframework\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/Volumes/Data/www/hackathon-project/src/pages/contact/contact.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
 ], ContactPage);
