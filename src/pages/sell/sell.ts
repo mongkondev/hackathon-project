@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController } from 'ionic-angular';
 import FirebaseLib from '../../services/firebaseLib';
 import { Http, Headers, Response } from '@angular/http';
+declare var _;
 
 declare var firebase;
 declare var $;
@@ -19,12 +20,14 @@ export class SellPage {
         description : null,
         price : null,
         location : null,
+        latlng : null,
     }
 
     constructor(
         public navCtrl: NavController,
         public alertCtrl: AlertController,
-        public loadCtrl: LoadingController
+        public loadCtrl: LoadingController,
+        public http:Http,
     ) {
         
         var user = firebase.auth().currentUser;
@@ -52,15 +55,97 @@ export class SellPage {
 
     getGeocode(latlng){
 
-        return new Promise((resolve, reject) => {
+        //return new Promise((resolve, reject) => {
 
             let url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng='+latlng+'&sensor=true&language=th&region=TH&key=AIzaSyACgG6fqREwXMyCRYi1no8i_xS8HECFsC8'
 
-            var observabe = this.http.get(url)
-            .map(res => res.json())
-            .subscribe(
-            res=>{
+            // var observabe = this.http.get(url)
+            // .map(res => res.json())
+            // .subscribe(
+            // res=>{
 
+            //     let resultObj = {}
+
+            //     if(res.results[0]){
+
+            //         if(res.results[0].address_components){
+
+            //             _.each(res.results[0].address_components, address_component=>{
+
+            //                 var hasStreetNumber = _.find(address_component.types, o=>o=="street_number")
+
+            //                 if(hasStreetNumber){
+            //                     if(resultObj['address.address']) return
+            //                     return resultObj['address.address'] = address_component.long_name.split(" ")[0]
+            //                 }
+
+            //                 var hasRoute = _.find(address_component.types, o=>o=="route")
+
+            //                 if(hasRoute){
+
+            //                     if(resultObj['address.street']) return
+            //                     return resultObj['address.street'] = address_component.long_name
+            //                 }
+
+            //                 if(_.isString(address_component.long_name)){
+
+            //                     var hasSubDistrict = address_component.long_name.substring(0, 4)=="ตำบล" || address_component.long_name.substring(0, 4)=="แขวง"
+
+            //                     if(hasSubDistrict){
+            //                         if(resultObj['address.sub_district']) return
+            //                         return resultObj['address.sub_district'] = address_component.long_name
+            //                     }
+
+            //                     var hasDistrict = address_component.long_name.substring(0, 5)=="อำเภอ" || address_component.long_name.substring(0, 3)=="เขต"
+
+            //                     if(hasDistrict){
+            //                         if(resultObj['address.district']) return
+            //                         return resultObj['address.district'] = address_component.long_name
+            //                     }
+
+            //                 }
+
+            //                 var hasProvince = _.find(address_component.types, o=>o=="administrative_area_level_1")
+
+            //                 if(hasProvince){
+            //                     if(resultObj['address.province']) return
+            //                     return resultObj['address.province'] = address_component.long_name
+            //                 }
+
+            //                 var hasPostalCode = _.find(address_component.types, o=>o=="postal_code")
+
+            //                 if(hasPostalCode){
+            //                     if(resultObj['address.zipcode']) return
+            //                     return resultObj['address.zipcode'] = address_component.long_name
+            //                 }
+
+
+            //             })
+
+                        
+            //         }
+
+            //     }
+
+            //     resolve(resultObj)
+            //     this.data.location=resultObj;
+            //     this.data.latlng = latlng;
+
+            // },
+            // err=>{
+
+            //     reject()
+
+            // })
+
+            $.ajax({
+                url: url,
+                type: 'default GET (Other values: POST)',
+                dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
+                data: {param1: 'value1'},
+            })
+            .done(function(data) {
+                let res = data.json()
                 let resultObj = {}
 
                 if(res.results[0]){
@@ -123,17 +208,17 @@ export class SellPage {
                     }
 
                 }
-
-                resolve(resultObj)
-
-            },
-            err=>{
-
-                reject()
-
+                this.data.location=resultObj;
+                this.data.latlng = latlng;
+            })
+            .fail(function() {
+                console.log("error")
+            })
+            .always(function() {
+                console.log("complete")
             })
 
-        })
+        //})
 
     }
     deleteFile(key){
