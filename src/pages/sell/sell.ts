@@ -36,6 +36,7 @@ export class SellPage {
         }
 
         this.getLocation();
+        console.log(this.data);
 
     }
     getLocation() {
