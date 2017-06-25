@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { NavController, Events, AlertController } from 'ionic-angular';
 import FirebaseLib from '../../services/firebaseLib';
 
+import { ShowNotifyPage } from '../showNotify/showNotify';
+
 declare var firebase;
+declare var _;
 
 @Component({
     selector: 'page-setting',
@@ -12,6 +15,7 @@ export class SettingPage {
 
     showSignInButton = false
     countProducts = null
+    notifys = []
 
     constructor(
         public navCtrl: NavController,
@@ -33,6 +37,22 @@ export class SettingPage {
             this.showSignInButton = true
         }else{
             this.showSignInButton = false
+
+            firebase.database().ref('userNotify/' + user.uid).on('value', (snapshot) => {
+
+                this.notifys = []
+
+                snapshot.forEach((childSnapshot) => {
+                    var childKey = childSnapshot.key;
+                    var childData = childSnapshot.val();
+                    childData._id = childKey
+
+                    this.notifys.push(childData)
+                });
+
+                this.notifys = _.orderBy(this.notifys, 'created_at', 'desc');
+
+            });
 
             firebase.database().ref('userProducts/' + user.uid).on('value', (snapshot) => {
                 if(snapshot.val()){
@@ -75,6 +95,19 @@ export class SettingPage {
             this.event.publish("firebase:logedIn")
             
         })
+    }
+
+    showNotifys(){
+
+        console.log(this.notifys)
+
+        this.navCtrl.push(ShowNotifyPage, {
+            items : this.notifys
+        })
+    }
+
+    showProfile(){
+
     }
 
 }

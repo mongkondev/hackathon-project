@@ -35,7 +35,7 @@
 
     <ion-item class="detail-footer">
       <span item-left><p class="price">฿ {{item.price ? numberFormat(item.price) : 'ไม่ระบุ'}}</p></span>
-      <button ion-button icon-left clear item-end>
+      <button ion-button icon-left clear item-end (click)="sendNotify(item)">
         <ion-icon name="chatboxes"></ion-icon>
         Contact
       </button>

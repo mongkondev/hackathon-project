@@ -7,7 +7,8 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
-
+import { ShowNotifyPage } from '../pages/showNotify/showNotify';
+import { showNotifyDetailPage } from '../pages/showNotifyDetail/showNotifyDetail';
 import { SellPage } from '../pages/sell/sell';
 import { SettingPage } from '../pages/setting/setting';
 
@@ -21,7 +22,9 @@ let pages = [
   HomePage,
   TabsPage,
   SellPage,
-  SettingPage
+  SettingPage,
+  ShowNotifyPage,
+  showNotifyDetailPage
 ]
 
 @NgModule({

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Notify
+    </ion-title>
+
+    <ion-buttons end>
+        <button ion-button (click)="save()">Send</button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <button ion-item (click)="detail(item)" *ngFor="let item of items">
+      <p>{{item.name}} contact you. {{item.description}}</p>
+    </button>
+
+  </ion-list>
+</ion-content>
