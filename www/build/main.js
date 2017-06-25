@@ -30622,7 +30622,7 @@ var /** @type {?} */ menuTypes = {};
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_alert_alert__ = __webpack_require__(52);
 /* unused harmony reexport Alert */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__components_alert_alert_controller__ = __webpack_require__(108);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_6__components_alert_alert_controller__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_6__components_alert_alert_controller__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__components_alert_alert_component__ = __webpack_require__(51);
 /* unused harmony reexport AlertCmp */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_app_app__ = __webpack_require__(6);
@@ -30700,7 +30700,7 @@ var /** @type {?} */ menuTypes = {};
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_44__components_loading_loading__ = __webpack_require__(133);
 /* unused harmony reexport Loading */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_45__components_loading_loading_controller__ = __webpack_require__(132);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return __WEBPACK_IMPORTED_MODULE_45__components_loading_loading_controller__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_45__components_loading_loading_controller__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_46__components_loading_loading_component__ = __webpack_require__(63);
 /* unused harmony reexport LoadingCmp */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_47__components_menu_menu__ = __webpack_require__(136);
@@ -30831,7 +30831,7 @@ var /** @type {?} */ menuTypes = {};
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_108__platform_dom_controller__ = __webpack_require__(8);
 /* unused harmony reexport DomController */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_109__platform_platform__ = __webpack_require__(3);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return __WEBPACK_IMPORTED_MODULE_109__platform_platform__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return __WEBPACK_IMPORTED_MODULE_109__platform_platform__["a"]; });
 /* unused harmony reexport setupPlatform */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_110__tap_click_haptic__ = __webpack_require__(36);
 /* unused harmony reexport Haptic */
@@ -30876,7 +30876,7 @@ var /** @type {?} */ menuTypes = {};
 /* unused harmony reexport GestureDelegate */
 /* unused harmony reexport BlockerDelegate */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_125__util_events__ = __webpack_require__(183);
-/* unused harmony reexport Events */
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return __WEBPACK_IMPORTED_MODULE_125__util_events__["b"]; });
 /* unused harmony reexport setupEvents */
 /* unused harmony reexport setupProvideEvents */
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_126__util_ionic_error_handler__ = __webpack_require__(238);
@@ -55820,7 +55820,6 @@ var HomePage = (function () {
         //var products = firebase.database().ref('products').orderByKey().limitToLast(2).endAt('-KnSsEXq9TpffsBw46yM').on('value', (snapshot) => {
         var products = firebase.database().ref('products').on('value', function (snapshot) {
             _this.items = [];
-            console.log(snapshot.val());
             snapshot.forEach(function (childSnapshot) {
                 var childKey = childSnapshot.key;
                 var childData = childSnapshot.val();
@@ -55838,7 +55837,6 @@ var HomePage = (function () {
         });
     }
     HomePage.prototype.openGoogleMap = function (item) {
-        console.log(item.latlng);
         window.open('https://maps.google.com?q=' + item.latlng);
     };
     HomePage.prototype.numberFormat = function (text) {
@@ -55852,10 +55850,10 @@ HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Product</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid style="height: 100%;justify-content: center;" *ngIf="items.length == 0">\n\n      <ion-row>\n\n      <ion-col text-center>\n\n        <img src="assets/noto-emoji/png/128/emoji_u1f617.png">\n\n        <div>Product not available!</div>\n\n      </ion-col>\n\n      </ion-row>\n\n  </ion-grid>\n\n\n\n\n\n  <ion-card class="product-card" *ngFor="let item of items">\n\n    <div style="position: relative">\n\n      <div class="image">\n\n        <img *ngIf="item.thumbnail" [src]="item.thumbnail">\n\n      </div>\n\n      <ion-fab right top  *ngIf="item.latlng">\n\n        <button ion-fab (click)="openGoogleMap(item)">\n\n          <ion-icon name="pin"></ion-icon>\n\n        </button>\n\n      </ion-fab>\n\n    </div>\n\n\n\n    <ion-item class="detail">\n\n      <h2>{{item.title}}</h2>\n\n      <p *ngIf="item.location">{{item.location.district}} {{item.location.province}}</p>\n\n    </ion-item>\n\n\n\n    <ion-item class="detail-footer">\n\n      <span item-left><p class="price">฿ {{item.price ? numberFormat(item.price) : \'ไม่ระบุ\'}}</p></span>\n\n      <button ion-button icon-left clear item-end>\n\n        <ion-icon name="chatboxes"></ion-icon>\n\n        Contact\n\n      </button>\n\n    </ion-item>\n\n\n\n  </ion-card>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _b || Object])
 ], HomePage);
 
+var _a, _b;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
@@ -55880,10 +55878,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var SellPage = (function () {
-    function SellPage(navCtrl, alertCtrl, loadCtrl) {
+    function SellPage(navCtrl, alertCtrl, loadCtrl, event) {
+        var _this = this;
         this.navCtrl = navCtrl;
         this.alertCtrl = alertCtrl;
         this.loadCtrl = loadCtrl;
+        this.event = event;
         this.showSignInButton = false;
         this.images = [];
         this.data = {
@@ -55893,12 +55893,21 @@ var SellPage = (function () {
             location: null,
             latlng: null,
         };
+        this.getAuth();
+        this.event.subscribe("firebase:logedIn", function () {
+            _this.getAuth();
+        });
+        //this.getLocation();
+    }
+    SellPage.prototype.getAuth = function () {
         var user = firebase.auth().currentUser;
         if (!user) {
             this.showSignInButton = true;
         }
-        //this.getLocation();
-    }
+        else {
+            this.showSignInButton = false;
+        }
+    };
     SellPage.prototype.getLocation = function () {
         var _this = this;
         this.loading = this.loadCtrl.create();
@@ -55910,12 +55919,12 @@ var SellPage = (function () {
         }
         else {
             this.loading.dismiss();
-            var alert_1 = this.alertCtrl.create({
+            var alert = this.alertCtrl.create({
                 title: 'Alert',
                 subTitle: 'Geolocation is not supported by this browser.',
                 buttons: ['OK']
             });
-            alert_1.present();
+            alert.present();
         }
     };
     SellPage.prototype.showPosition = function (position) {
@@ -55929,56 +55938,6 @@ var SellPage = (function () {
         //return new Promise((resolve, reject) => {
         var _this = this;
         var url = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=' + latlng + '&sensor=true&language=th&region=TH&key=AIzaSyACgG6fqREwXMyCRYi1no8i_xS8HECFsC8';
-        // var observabe = this.http.get(url)
-        // .map(res => res.json())
-        // .subscribe(
-        // res=>{
-        //     let resultObj = {}
-        //     if(res.results[0]){
-        //         if(res.results[0].address_components){
-        //             _.each(res.results[0].address_components, address_component=>{
-        //                 var hasStreetNumber = _.find(address_component.types, o=>o=="street_number")
-        //                 if(hasStreetNumber){
-        //                     if(resultObj['address.address']) return
-        //                     return resultObj['address.address'] = address_component.long_name.split(" ")[0]
-        //                 }
-        //                 var hasRoute = _.find(address_component.types, o=>o=="route")
-        //                 if(hasRoute){
-        //                     if(resultObj['address.street']) return
-        //                     return resultObj['address.street'] = address_component.long_name
-        //                 }
-        //                 if(_.isString(address_component.long_name)){
-        //                     var hasSubDistrict = address_component.long_name.substring(0, 4)=="ตำบล" || address_component.long_name.substring(0, 4)=="แขวง"
-        //                     if(hasSubDistrict){
-        //                         if(resultObj['address.sub_district']) return
-        //                         return resultObj['address.sub_district'] = address_component.long_name
-        //                     }
-        //                     var hasDistrict = address_component.long_name.substring(0, 5)=="อำเภอ" || address_component.long_name.substring(0, 3)=="เขต"
-        //                     if(hasDistrict){
-        //                         if(resultObj['address.district']) return
-        //                         return resultObj['address.district'] = address_component.long_name
-        //                     }
-        //                 }
-        //                 var hasProvince = _.find(address_component.types, o=>o=="administrative_area_level_1")
-        //                 if(hasProvince){
-        //                     if(resultObj['address.province']) return
-        //                     return resultObj['address.province'] = address_component.long_name
-        //                 }
-        //                 var hasPostalCode = _.find(address_component.types, o=>o=="postal_code")
-        //                 if(hasPostalCode){
-        //                     if(resultObj['address.zipcode']) return
-        //                     return resultObj['address.zipcode'] = address_component.long_name
-        //                 }
-        //             })
-        //         }
-        //     }
-        //     resolve(resultObj)
-        //     this.data.location=resultObj;
-        //     this.data.latlng = latlng;
-        // },
-        // err=>{
-        //     reject()
-        // })
         $.ajax({
             url: url,
             type: 'GET',
@@ -56033,7 +55992,6 @@ var SellPage = (function () {
             _this.loading.dismiss();
             _this.data.location = resultObj;
             _this.data.latlng = latlng;
-            console.log(resultObj, latlng);
         });
     };
     SellPage.prototype.deleteFile = function (key) {
@@ -56136,6 +56094,7 @@ var SellPage = (function () {
     SellPage.prototype.signIn = function () {
         var _this = this;
         __WEBPACK_IMPORTED_MODULE_2__services_firebaseLib__["a" /* default */].signInGoogle().then(function (result) {
+            __WEBPACK_IMPORTED_MODULE_2__services_firebaseLib__["a" /* default */].updateProfile();
             _this.showSignInButton = false;
             var user = result.user;
             var alert = _this.alertCtrl.create({
@@ -56145,19 +56104,19 @@ var SellPage = (function () {
             });
             alert.present();
             _this.showSignInButton = false;
+            _this.event.publish("firebase:logedIn");
         });
     };
     return SellPage;
 }());
 SellPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-sell',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\sell\sell.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Sell\n\n    </ion-title>\n\n\n\n    <ion-buttons end>\n\n        <button ion-button (click)="save()">Save</button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-grid style="height: 100%;justify-content: center;" *ngIf="showSignInButton">\n\n        <ion-row>\n\n        <ion-col text-center>\n\n            <div>\n\n                <img src="assets/noto-emoji/png/128/emoji_u2639.png" alt="">\n\n            </div>\n\n            <button ion-button (click)="signIn()">Sign In</button>\n\n        </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n    <div *ngIf="!showSignInButton">\n\n        <ion-grid style="padding: 0px;">\n\n\n\n            <ion-row *ngFor="let row of arrayToGrid(images, 2)">\n\n\n\n                <ion-col col-6 text-center *ngFor="let col of row; let i = index">\n\n                    <img [src]="col.data" style="height: 150px">\n\n                    <button ion-button color="danger" full (click)="deleteFile(i)"><ion-icon name="ios-trash"></ion-icon> Delete</button>\n\n                </ion-col>\n\n\n\n            </ion-row>\n\n\n\n        </ion-grid>\n\n\n\n        <input type="file" id="file" multiple accept="image/*" (change)="onChangeFileInput($event)" style="display:none">\n\n        \n\n        <button ion-button full (click)="addPicture()"><ion-icon name="ios-camera"></ion-icon>  Add Picture</button>\n\n\n\n        <ion-list>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>Title</ion-label>\n\n                <ion-input type="text" [(ngModel)]="data.title"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>Description</ion-label>\n\n                <ion-textarea [(ngModel)]="data.description"></ion-textarea>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>Price</ion-label>\n\n                <ion-input type="number" [(ngModel)]="data.price"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                Location\n\n                <p item-end *ngIf="data.location">{{data.location.district}} {{data.location.province}}</p>\n\n                <button ion-button clear item-end icon-left *ngIf="data.location" (click)="clearLocation()">\n\n                    <ion-icon name="md-close"></ion-icon>\n\n                </button>\n\n                <button ion-button item-end icon-left *ngIf="!data.location" (click)="getLocation()">\n\n                    <ion-icon name="md-locate"></ion-icon>\n\n                    Check In\n\n                </button>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\sell\sell.html"*/
+        selector: 'page-sell',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\sell\sell.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Sell\n\n    </ion-title>\n\n\n\n    <ion-buttons end *ngIf="!showSignInButton">\n\n        <button ion-button (click)="save()">Save</button>\n\n    </ion-buttons>\n\n\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n    <ion-grid style="height: 100%;justify-content: center;" *ngIf="showSignInButton">\n\n        <ion-row>\n\n        <ion-col text-center>\n\n            <div>\n\n                <img src="assets/noto-emoji/png/128/emoji_u2639.png" alt="">\n\n            </div>\n\n            <button ion-button (click)="signIn()">Sign In</button>\n\n        </ion-col>\n\n        </ion-row>\n\n    </ion-grid>\n\n\n\n    <div *ngIf="!showSignInButton">\n\n        <ion-grid style="padding: 0px;">\n\n\n\n            <ion-row *ngFor="let row of arrayToGrid(images, 2)">\n\n\n\n                <ion-col col-6 text-center *ngFor="let col of row; let i = index">\n\n                    <img [src]="col.data" style="height: 150px">\n\n                    <button ion-button color="danger" full (click)="deleteFile(i)"><ion-icon name="ios-trash"></ion-icon> Delete</button>\n\n                </ion-col>\n\n\n\n            </ion-row>\n\n\n\n        </ion-grid>\n\n\n\n        <input type="file" id="file" multiple accept="image/*" (change)="onChangeFileInput($event)" style="display:none">\n\n        \n\n        <button ion-button full (click)="addPicture()"><ion-icon name="ios-camera"></ion-icon>  Add Picture</button>\n\n\n\n        <ion-list>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>Title</ion-label>\n\n                <ion-input type="text" [(ngModel)]="data.title"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>Description</ion-label>\n\n                <ion-textarea [(ngModel)]="data.description"></ion-textarea>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                <ion-label stacked>Price</ion-label>\n\n                <ion-input type="number" [(ngModel)]="data.price"></ion-input>\n\n            </ion-item>\n\n\n\n            <ion-item>\n\n                Location\n\n                <p item-end *ngIf="data.location">{{data.location.district}} {{data.location.province}}</p>\n\n                <button ion-button clear item-end icon-left *ngIf="data.location" (click)="clearLocation()">\n\n                    <ion-icon name="md-close"></ion-icon>\n\n                </button>\n\n                <button ion-button item-end icon-left *ngIf="!data.location" (click)="getLocation()">\n\n                    <ion-icon name="md-locate"></ion-icon>\n\n                    Check In\n\n                </button>\n\n            </ion-item>\n\n\n\n        </ion-list>\n\n\n\n    </div>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\sell\sell.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* AlertController */],
-        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* AlertController */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* LoadingController */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */]) === "function" && _d || Object])
 ], SellPage);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=sell.js.map
 
 /***/ }),
@@ -56182,29 +56141,68 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var SettingPage = (function () {
-    function SettingPage(navCtrl) {
+    function SettingPage(navCtrl, event, alertCtrl) {
+        var _this = this;
         this.navCtrl = navCtrl;
+        this.event = event;
+        this.alertCtrl = alertCtrl;
         this.showSignInButton = false;
+        this.countProducts = null;
+        this.event.subscribe("firebase:logedIn", function () {
+            _this.getAuth();
+        });
+        this.getAuth();
+    }
+    SettingPage.prototype.getAuth = function () {
+        var _this = this;
         var user = firebase.auth().currentUser;
         if (!user) {
             this.showSignInButton = true;
         }
-    }
+        else {
+            this.showSignInButton = false;
+            firebase.database().ref('userProducts/' + user.uid).on('value', function (snapshot) {
+                if (snapshot.val()) {
+                    _this.countProducts = Object.keys(snapshot.val()).length;
+                }
+            });
+            /*FirebaseLib.countProducts().then(count=>{
+                this.countProducts = count
+            })*/
+        }
+    };
+    SettingPage.prototype.signOut = function () {
+        firebase.auth().signOut().then(function () {
+            window.location.reload();
+        }, function (error) {
+        });
+    };
     SettingPage.prototype.signIn = function () {
         var _this = this;
         __WEBPACK_IMPORTED_MODULE_2__services_firebaseLib__["a" /* default */].signInGoogle().then(function (result) {
+            __WEBPACK_IMPORTED_MODULE_2__services_firebaseLib__["a" /* default */].updateProfile();
             _this.showSignInButton = false;
+            var user = result.user;
+            var alert = _this.alertCtrl.create({
+                title: 'Wellcome',
+                subTitle: 'Wellcome ' + user.displayName,
+                buttons: ['OK']
+            });
+            alert.present();
+            _this.showSignInButton = false;
+            _this.event.publish("firebase:logedIn");
         });
     };
     return SettingPage;
 }());
 SettingPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\setting\setting.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Setting\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n  <ion-grid style="height: 100%;justify-content: center;" *ngIf="showSignInButton">\n\n      <ion-row>\n\n      <ion-col text-center>\n\n          <div>\n\n              <img src="assets/noto-emoji/png/128/emoji_u2639.png" alt="">\n\n          </div>\n\n          <button ion-button (click)="signIn()">Sign In</button>\n\n      </ion-col>\n\n      </ion-row>\n\n  </ion-grid>\n\n\n\n  <ion-list *ngIf="false">\n\n    <button ion-item>\n\n      Profile\n\n    </button>\n\n    <button ion-item>\n\n      Notification\n\n      <ion-badge item-end>10</ion-badge>\n\n    </button>\n\n    <button ion-item>\n\n      My Product\n\n      <ion-badge item-end color="light">10</ion-badge>\n\n    </button>\n\n    <button ion-item>\n\n      Sign Out\n\n    </button>\n\n  </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\setting\setting.html"*/
+        selector: 'page-setting',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\setting\setting.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>\n\n      Setting\n\n    </ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content>\n\n\n\n  <ion-grid style="height: 100%;justify-content: center;" *ngIf="showSignInButton">\n\n      <ion-row>\n\n      <ion-col text-center>\n\n          <div>\n\n              <img src="assets/noto-emoji/png/128/emoji_u2639.png" alt="">\n\n          </div>\n\n          <button ion-button (click)="signIn()">Sign In</button>\n\n      </ion-col>\n\n      </ion-row>\n\n  </ion-grid>\n\n\n\n  <ion-list *ngIf="!showSignInButton">\n\n    <button ion-item>\n\n      Profile\n\n    </button>\n\n    <button ion-item>\n\n      Notification\n\n      <ion-badge item-end>10</ion-badge>\n\n    </button>\n\n    <button ion-item>\n\n      My Product\n\n      <ion-badge item-end color="light">{{countProducts}}</ion-badge>\n\n    </button>\n\n    <button ion-item (click)="signOut()">\n\n      Sign Out\n\n    </button>\n\n  </ion-list>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\setting\setting.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* AlertController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* AlertController */]) === "function" && _c || Object])
 ], SettingPage);
 
+var _a, _b, _c;
 //# sourceMappingURL=setting.js.map
 
 /***/ }),
@@ -56213,9 +56211,10 @@ SettingPage = __decorate([
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__sell_sell__ = __webpack_require__(99);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__setting_setting__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__home_home__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__sell_sell__ = __webpack_require__(99);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__setting_setting__ = __webpack_require__(100);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TabsPage; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -56230,20 +56229,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var TabsPage = (function () {
-    function TabsPage() {
-        this.tab1Root = __WEBPACK_IMPORTED_MODULE_1__home_home__["a" /* HomePage */];
-        this.tab2Root = __WEBPACK_IMPORTED_MODULE_2__sell_sell__["a" /* SellPage */];
-        this.tab3Root = __WEBPACK_IMPORTED_MODULE_3__setting_setting__["a" /* SettingPage */];
+    function TabsPage(event) {
+        this.event = event;
+        this.tab1Root = __WEBPACK_IMPORTED_MODULE_2__home_home__["a" /* HomePage */];
+        this.tab2Root = __WEBPACK_IMPORTED_MODULE_3__sell_sell__["a" /* SellPage */];
+        this.tab3Root = __WEBPACK_IMPORTED_MODULE_4__setting_setting__["a" /* SettingPage */];
     }
+    TabsPage.prototype.onClickHome = function () {
+        //this.getAuth()
+    };
+    TabsPage.prototype.getAuth = function () {
+        var user = firebase.auth().currentUser;
+        if (user) {
+            this.event.publish("firebase:logedIn");
+        }
+    };
     return TabsPage;
 }());
 TabsPage = __decorate([
-    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <ion-tab [root]="tab1Root" tabTitle="Product" tabIcon="cube"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="Sell" tabIcon="logo-usd"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="Setting" tabIcon="settings" tabBadge="3"></ion-tab>\n\n</ion-tabs>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\tabs\tabs.html"*/
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <ion-tab [root]="tab1Root" tabTitle="Product" tabIcon="cube"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="Sell" (ionSelect)="onClickHome()" tabIcon="logo-usd"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="Setting" (ionSelect)="onClickHome()" tabIcon="settings" tabBadge="3"></ion-tab>\n\n</ion-tabs>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\tabs\tabs.html"*/
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Events */]) === "function" && _a || Object])
 ], TabsPage);
 
+var _a;
 //# sourceMappingURL=tabs.js.map
 
 /***/ }),
@@ -56265,8 +56276,10 @@ TabsPage = __decorate([
         if (data.price) {
             data.price = parseInt(data.price);
         }
+        data.uid = user.uid;
         var newProductsKey = products.push(data).key;
         var userProducts = firebase.database().ref('userProducts/' + user.uid + '/' + newProductsKey);
+        userProducts.set(true);
     },
     signInGoogle: function () {
         var provider = new firebase.auth.GoogleAuthProvider();
@@ -56302,6 +56315,56 @@ TabsPage = __decorate([
             });*/
         });
         return Promise.all(ps);
+    },
+    countProducts: function () {
+        return new Promise(function (resolve, reject) {
+            resolve(1);
+        });
+    },
+    updateProfile: function () {
+        var user = firebase.auth().currentUser;
+        var userRef = firebase.database().ref('userProfile/' + user.uid);
+        userRef.set({
+            displayName: user.displayName,
+            email: user.email
+        });
+        var messaging = firebase.messaging();
+        messaging.requestPermission()
+            .then(function () {
+            console.log('Notification permission granted.');
+            // TODO(developer): Retrieve an Instance ID token for use with FCM.
+            // ...
+            messaging.getToken()
+                .then(function (currentToken) {
+                if (currentToken) {
+                    console.log('currentToken : ', currentToken);
+                    var userRef = firebase.database().ref('userFcm/' + user.uid);
+                    userRef.set(currentToken);
+                    //sendTokenToServer(currentToken);
+                    //updateUIForPushEnabled(currentToken);
+                }
+                else {
+                    // Show permission request.
+                    console.log('No Instance ID token available. Request permission to generate one.');
+                    // Show permission UI.
+                    //updateUIForPushPermissionRequired();
+                    //setTokenSentToServer(false);
+                }
+            })
+                .catch(function (err) {
+                console.log('An error occurred while retrieving token. ', err);
+                //showToken('Error retrieving Instance ID token. ', err);
+                //setTokenSentToServer(false);
+            });
+        })
+            .catch(function (err) {
+            console.log('Unable to get permission to notify.', err);
+        });
+        /*.on('value', (snapshot) => {
+            if(snapshot.val()){
+                this.countProducts = Object.keys(snapshot.val()).length
+            }
+        });*/
     }
 };
 //# sourceMappingURL=firebaseLib.js.map
@@ -74998,7 +75061,7 @@ var MyApp = (function () {
 MyApp = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\app\app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
 ], MyApp);
 
 //# sourceMappingURL=app.component.js.map

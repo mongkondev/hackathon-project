@@ -33,7 +33,6 @@ export class SellPage {
         this.getAuth()
 
         this.event.subscribe("firebase:logedIn", ()=>{
-            console.log("has firebase:logedIn in sell")
             this.getAuth()
         })
 
@@ -161,8 +160,6 @@ export class SellPage {
 
                 this.data.location=resultObj;
                 this.data.latlng = latlng;
-
-                console.log(resultObj, latlng)
 
             })
 
@@ -311,6 +308,8 @@ export class SellPage {
     signIn(){
 
         FirebaseLib.signInGoogle().then((result) => {
+
+            FirebaseLib.updateProfile()
 
             this.showSignInButton = false
             var user = result.user;

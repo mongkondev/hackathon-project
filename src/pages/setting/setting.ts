@@ -11,6 +11,7 @@ declare var firebase;
 export class SettingPage {
 
     showSignInButton = false
+    countProducts = null
 
     constructor(
         public navCtrl: NavController,
@@ -19,7 +20,6 @@ export class SettingPage {
     ) {
 
         this.event.subscribe("firebase:logedIn", ()=>{
-            console.log("has firebase:logedIn in setting")
             this.getAuth()
         })
 
@@ -33,6 +33,17 @@ export class SettingPage {
             this.showSignInButton = true
         }else{
             this.showSignInButton = false
+
+            firebase.database().ref('userProducts/' + user.uid).on('value', (snapshot) => {
+                if(snapshot.val()){
+                    this.countProducts = Object.keys(snapshot.val()).length
+                }
+            });
+
+            /*FirebaseLib.countProducts().then(count=>{
+                this.countProducts = count
+            })*/
+            
         }
     }
 
@@ -47,6 +58,8 @@ export class SettingPage {
     signIn(){
 
         FirebaseLib.signInGoogle().then((result) => {
+
+            FirebaseLib.updateProfile()
 
             this.showSignInButton = false
             var user = result.user;

@@ -27,8 +27,6 @@ export class HomePage {
     var products = firebase.database().ref('products').on('value', (snapshot) => {
       this.items = []
 
-      console.log(snapshot.val())
-
       snapshot.forEach((childSnapshot) => {
         var childKey = childSnapshot.key;
         var childData = childSnapshot.val();
@@ -54,7 +52,6 @@ export class HomePage {
   }
 
   openGoogleMap(item){
-    console.log(item.latlng)
     window.open('https://maps.google.com?q='+item.latlng);
   }
 
