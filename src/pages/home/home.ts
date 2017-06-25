@@ -53,6 +53,11 @@ export class HomePage {
 
   }
 
+  openGoogleMap(item){
+    console.log(item.latlng)
+    window.open('https://maps.google.com?q='+item.latlng);
+  }
+
   numberFormat(text){
     return text.toFixed(2).replace(/./g, function(c, i, a) {
       return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;

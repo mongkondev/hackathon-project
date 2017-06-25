@@ -21,8 +21,8 @@
       <div class="image">
         <img *ngIf="item.thumbnail" [src]="item.thumbnail">
       </div>
-      <ion-fab right top>
-        <button ion-fab>
+      <ion-fab right top  *ngIf="item.latlng">
+        <button ion-fab (click)="openGoogleMap(item)">
           <ion-icon name="pin"></ion-icon>
         </button>
       </ion-fab>
