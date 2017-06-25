@@ -55808,26 +55808,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var HomePage = (function () {
-    function HomePage(navCtrl) {
+    function HomePage(navCtrl, loadingCtrl) {
+        var _this = this;
         this.navCtrl = navCtrl;
+        this.loadingCtrl = loadingCtrl;
         this.items = [];
+        this.isLoading = false;
+        this.isLoading = true;
+        var loading = this.loadingCtrl.create();
+        loading.present();
+        //var products = firebase.database().ref('products').orderByKey().limitToLast(2).endAt('-KnSsEXq9TpffsBw46yM').on('value', (snapshot) => {
         var products = firebase.database().ref('products').on('value', function (snapshot) {
+            _this.items = [];
             console.log(snapshot.val());
+            snapshot.forEach(function (childSnapshot) {
+                var childKey = childSnapshot.key;
+                var childData = childSnapshot.val();
+                childData.thumbnail = 'assets/img/no_image_thumb.gif';
+                if (childData.images) {
+                    if (childData.images[0]) {
+                        childData.thumbnail = childData.images[0];
+                    }
+                }
+                _this.items.push(childData);
+            });
+            _this.items = _.orderBy(_this.items, 'created_at', 'desc');
+            loading.dismiss();
+            _this.isLoading = false;
         });
-        this.items = [
-            1, 2, 3, 4, 5, 6, 7, 8, 9
-        ];
     }
+    HomePage.prototype.numberFormat = function (text) {
+        return text.toFixed(2).replace(/./g, function (c, i, a) {
+            return i && c !== "." && ((a.length - i) % 3 === 0) ? ',' + c : c;
+        });
+    };
     return HomePage;
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_6" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Product</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <ion-card class="product-card" *ngFor="let item of items">\n\n    <div style="position: relative">\n\n      <img src="https://placeimg.com/200/200/any">\n\n      <ion-fab right top>\n\n        <button ion-fab>\n\n          <ion-icon name="pin"></ion-icon>\n\n        </button>\n\n      </ion-fab>\n\n    </div>\n\n\n\n    <ion-item class="detail">\n\n      <h2>item name</h2>\n\n      <p>ไชโย อ่างทอง (3.1 Km)</p>\n\n    </ion-item>\n\n\n\n    <ion-item class="detail-footer">\n\n      <span item-left><p class="price">฿ 10,000</p></span>\n\n      <button ion-button icon-left clear item-end>\n\n        <ion-icon name="chatboxes"></ion-icon>\n\n        Contact\n\n      </button>\n\n    </ion-item>\n\n\n\n  </ion-card>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Product</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n\n\n  <ion-grid style="height: 100%;justify-content: center;" *ngIf="items.length == 0">\n\n      <ion-row>\n\n      <ion-col text-center>\n\n        <img src="assets/noto-emoji/png/128/emoji_u1f617.png">\n\n        <div>Product not available!</div>\n\n      </ion-col>\n\n      </ion-row>\n\n  </ion-grid>\n\n\n\n  <ion-list [virtualScroll]="items">\n\n\n\n    <ion-card class="product-card" *virtualItem="let item">\n\n      <div style="position: relative">\n\n        <img *ngIf="item.thumbnail" [src]="item.thumbnail">\n\n        <ion-fab right top>\n\n          <button ion-fab>\n\n            <ion-icon name="pin"></ion-icon>\n\n          </button>\n\n        </ion-fab>\n\n      </div>\n\n\n\n      <ion-item class="detail">\n\n        <h2>{{item.title}}</h2>\n\n        <!--<p>ไชโย อ่างทอง (3.1 Km)</p>-->\n\n      </ion-item>\n\n\n\n      <ion-item class="detail-footer">\n\n        <span item-left><p class="price">฿ {{item.price ? numberFormat(item.price) : \'ไม่ระบุ\'}}</p></span>\n\n        <button ion-button icon-left clear item-end>\n\n          <ion-icon name="chatboxes"></ion-icon>\n\n          Contact\n\n        </button>\n\n      </ion-item>\n\n\n\n    </ion-card>\n\n\n\n  </ion-list>\n\n  \n\n  <!--<ion-card class="product-card" *ngFor="let item of items">\n\n    <div style="position: relative">\n\n      <div class="image">\n\n        <div *ngIf="item.images">\n\n          <img *ngIf="item.images[0]" [src]="item.images[0]">\n\n        </div>\n\n        <div *ngIf="!item.images">\n\n          <img src="assets/img/no_image_thumb.gif">\n\n        </div>\n\n      </div>\n\n      <ion-fab right top>\n\n        <button ion-fab>\n\n          <ion-icon name="pin"></ion-icon>\n\n        </button>\n\n      </ion-fab>\n\n    </div>\n\n\n\n    <ion-item class="detail">\n\n      <h2>{{item.title}}</h2>\n\n      <p>ไชโย อ่างทอง (3.1 Km)</p>\n\n    </ion-item>\n\n\n\n    <ion-item class="detail-footer">\n\n      <span item-left><p class="price">฿ {{item.price ? numberFormat(item.price) : \'ไม่ระบุ\'}}</p></span>\n\n      <button ion-button icon-left clear item-end>\n\n        <ion-icon name="chatboxes"></ion-icon>\n\n        Contact\n\n      </button>\n\n    </ion-item>\n\n\n\n  </ion-card>-->\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Users\NOTE\Code\pwa\ionic\myApp\src\pages\home\home.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _b || Object])
 ], HomePage);
 
-var _a;
+var _a, _b;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
@@ -55858,7 +55882,11 @@ var SellPage = (function () {
         this.loadCtrl = loadCtrl;
         this.showSignInButton = false;
         this.images = [];
-        this.data = {};
+        this.data = {
+            title: null,
+            description: null,
+            price: null
+        };
         var user = firebase.auth().currentUser;
         if (!user) {
             this.showSignInButton = true;
@@ -55941,12 +55969,25 @@ var SellPage = (function () {
             loading.dismiss();
             res.forEach(function (image) {
                 imagesUrl.push(image.metadata.downloadURLs[0]);
-                //console.log(image.value())
             });
             _this.data.images = imagesUrl;
             __WEBPACK_IMPORTED_MODULE_2__services_firebaseLib__["a" /* default */].addProduct(_this.data);
-            console.log(_this.data);
+            var alert = _this.alertCtrl.create({
+                title: 'Success',
+                subTitle: 'Add product success.',
+                buttons: ['OK']
+            });
+            alert.present();
+            _this.reset();
         });
+    };
+    SellPage.prototype.reset = function () {
+        this.images = [];
+        this.data = {
+            title: null,
+            description: null,
+            price: null
+        };
     };
     SellPage.prototype.signIn = function () {
         var _this = this;
@@ -56072,13 +56113,15 @@ TabsPage = __decorate([
         });*/
     },
     addProduct: function (data) {
+        var ps = [];
         var user = firebase.auth().currentUser;
         var products = firebase.database().ref('products');
         data.created_at = firebase.database.ServerValue.TIMESTAMP;
-        data.price = parseInt(data.price);
+        if (data.price) {
+            data.price = parseInt(data.price);
+        }
         var newProductsKey = products.push(data).key;
         var userProducts = firebase.database().ref('userProducts/' + user.uid + '/' + newProductsKey);
-        userProducts.set(true);
     },
     signInGoogle: function () {
         var provider = new firebase.auth.GoogleAuthProvider();

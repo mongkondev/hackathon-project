@@ -24740,6 +24740,14 @@ ion-navbar.toolbar {
   }
 }
 
+page-home .product-card ion-img {
+  width: 100%;
+}
+
+page-home .product-card .image {
+  min-height: 80px;
+}
+
 page-home .product-card .price {
   font-size: 1.5rem;
   font-weight: bold;

@@ -1,5 +1,11 @@
 page-home {
     .product-card{
+        ion-img{
+            width: 100%;
+        }
+        .image{
+            min-height: 80px;
+        }
         .price{
             font-size: 1.5rem;
             font-weight: bold;
