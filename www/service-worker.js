@@ -17,6 +17,8 @@ self.toolbox.precache(
     './build/main.js',
     './build/main.css',
     './build/polyfills.js',
+    './assets/noto-emoji/png/128/emoji_u1f617.png',
+    './assets/noto-emoji/png/128/emoji_u2639.png',
     'index.html',
     'manifest.json'
   ]

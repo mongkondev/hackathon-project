@@ -13,7 +13,11 @@ export class SellPage {
 
     public showSignInButton = false
     public images = []
-    public data:any = {}
+    public data:any = {
+        title : null,
+        description : null,
+        price : null
+    }
 
     constructor(
         public navCtrl: NavController,
@@ -141,17 +145,32 @@ export class SellPage {
 
                 imagesUrl.push(image.metadata.downloadURLs[0])
 
-                //console.log(image.value())
             });
 
             this.data.images = imagesUrl
 
             FirebaseLib.addProduct(this.data)
 
-            console.log(this.data)
+            let alert = this.alertCtrl.create({
+                title: 'Success',
+                subTitle: 'Add product success.',
+                buttons: ['OK']
+            });
+            alert.present();
+
+            this.reset()
 
         })
 
+    }
+
+    reset(){
+        this.images = []
+        this.data = {
+            title : null,
+            description : null,
+            price : null
+        }
     }
 
     signIn(){

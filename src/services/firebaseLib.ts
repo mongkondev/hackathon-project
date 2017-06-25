@@ -9,19 +9,21 @@ export default {
     },
     addProduct(data){
 
+        let ps = []
+
         var user = firebase.auth().currentUser;
 
         var products = firebase.database().ref('products');
 
         data.created_at = firebase.database.ServerValue.TIMESTAMP
 
-        data.price = parseInt(data.price)
+        if(data.price){
+            data.price = parseInt(data.price)
+        }
 
         var newProductsKey =  products.push(data).key
 
         var userProducts = firebase.database().ref('userProducts/'+user.uid+'/'+newProductsKey);
-
-        userProducts.set(true)
 
     },
     signInGoogle(){
