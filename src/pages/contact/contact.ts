@@ -72,22 +72,6 @@ export class ContactPage {
     this.data.productId = this.item._id
     this.data.created_at = firebase.database.ServerValue.TIMESTAMP
 
-    $.ajax({
-        url: 'https://us-central1-hackathon-project-85df6.cloudfunctions.net/sendNotification',
-        type: 'POST',
-				data: JSON.stringify({
-          "targetUid" : this.item.uid,
-          "title" : this.data.name + " contact you.",
-          "body" : this.data.description
-        }),
-				contentType: "application/x-www-form-urlencoded",
-    })
-    .done((res) => {
-
-      
-      
-    })
-
     userNotify.push(this.data).then(()=>{
 
       this.data = {

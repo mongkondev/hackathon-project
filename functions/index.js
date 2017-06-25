@@ -4,12 +4,35 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
+exports.watchNotification = functions.database.ref('/userNotify/{targetUid}').onWrite(event => {
+
+    const targetUid = event.params.targetUid;
+
+    let title = "test title"
+    let body = "test body"
+
+    const getDeviceTokensPromise = admin.database().ref(`/userFcm/${targetUid}`).once('value').then(snapshot=>{
+
+        let token = snapshot.val()
+
+        const payload = {
+            notification: {
+                title: title,
+                body: body,
+            }
+        };
+
+        admin.messaging().sendToDevice(token, payload).then(response => {
+            console.log("sendToDevice", token, payload)
+        });
+
+    })
+
+})
+
 exports.sendNotification = functions.https.onRequest((req, res)=>{
 
-
-    let targetUid = 'ocfzCGt3UJVt2gxBIRyllQst06l2'
-
-    targetUid = req.body.targetUid
+    let targetUid = req.body.targetUid
 
     let title = req.body.title
     let body = req.body.body
