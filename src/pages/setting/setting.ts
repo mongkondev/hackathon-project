@@ -21,6 +21,14 @@ export class SettingPage {
 
     }
 
+    signOut(){
+        firebase.auth().signOut().then(function() {
+            window.location.reload()
+        }, function(error) {
+        
+        });
+    }
+
     signIn(){
         FirebaseLib.signInGoogle().then((result) => {
             this.showSignInButton = false

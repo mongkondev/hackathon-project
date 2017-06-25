@@ -19,7 +19,7 @@
       </ion-row>
   </ion-grid>
 
-  <ion-list *ngIf="false">
+  <ion-list *ngIf="!showSignInButton">
     <button ion-item>
       Profile
     </button>
@@ -31,7 +31,7 @@
       My Product
       <ion-badge item-end color="light">10</ion-badge>
     </button>
-    <button ion-item>
+    <button ion-item (click)="signOut()">
       Sign Out
     </button>
   </ion-list>
