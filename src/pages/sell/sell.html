@@ -26,39 +26,21 @@
 
     <div *ngIf="!showSignInButton">
         <ion-grid style="padding: 0px;">
-            <ion-row>
-                <ion-col text-center>
-                    <img src="https://placeimg.com/200/200/any">
-                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
+
+            <ion-row *ngFor="let row of arrayToGrid(images, 2)">
+
+                <ion-col col-6 text-center *ngFor="let col of row; let i = index">
+                    <img [src]="col.data" style="height: 150px">
+                    <button ion-button color="danger" full (click)="deleteFile(i)"><ion-icon name="ios-trash"></ion-icon> Delete</button>
                 </ion-col>
-                <ion-col text-center>
-                    <img src="https://placeimg.com/200/200/any">
-                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
-                </ion-col>
+
             </ion-row>
-            <ion-row>
-                <ion-col text-center>
-                    <img src="https://placeimg.com/200/200/any">
-                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
-                </ion-col>
-                <ion-col text-center>
-                    <img src="https://placeimg.com/200/200/any">
-                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col text-center>
-                    <img src="https://placeimg.com/200/200/any">
-                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
-                </ion-col>
-                <ion-col text-center>
-                    <img src="https://placeimg.com/200/200/any">
-                    <button ion-button color="danger" full><ion-icon name="ios-trash"></ion-icon> Delete</button>
-                </ion-col>
-            </ion-row>
+
         </ion-grid>
+
+        <input type="file" id="file" multiple accept="image/*" (change)="onChangeFileInput($event)" style="display:none">
         
-        <button ion-button full><ion-icon name="ios-camera"></ion-icon>  Add Picture</button>
+        <button ion-button full (click)="addPicture()"><ion-icon name="ios-camera"></ion-icon>  Add Picture</button>
 
         <ion-list>
 
@@ -70,6 +52,11 @@
             <ion-item>
                 <ion-label stacked>Description</ion-label>
                 <ion-textarea [(ngModel)]="data.description"></ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label stacked>Price</ion-label>
+                <ion-input type="number" [(ngModel)]="data.price"></ion-input>
             </ion-item>
 
             <ion-item>

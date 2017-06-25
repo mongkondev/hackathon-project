@@ -12,20 +12,6 @@
   <link rel="icon" type="image/png" sizes="32x32" href="assets/icon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/icon/favicon-16x16.png">
   <link rel="mask-icon" href="assets/icon/safari-pinned-tab.svg" color="#5bbad5">
-  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
-  <script>
-    // Initialize Firebase
-    var config = {
-      apiKey: "AIzaSyAew5NezWj07HMl9g8O2gKLs0j_sqK602M",
-      authDomain: "hackathon-project-85df6.firebaseapp.com",
-      databaseURL: "https://hackathon-project-85df6.firebaseio.com",
-      projectId: "hackathon-project-85df6",
-      storageBucket: "hackathon-project-85df6.appspot.com",
-      messagingSenderId: "501188007951"
-    };
-    firebase.initializeApp(config);
-  </script>
-
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#4e8ef7">
 
@@ -45,6 +31,24 @@
 
   <!-- Ionic's root component and where the app will load -->
   <ion-app></ion-app>
+
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyAew5NezWj07HMl9g8O2gKLs0j_sqK602M",
+        authDomain: "hackathon-project-85df6.firebaseapp.com",
+        databaseURL: "https://hackathon-project-85df6.firebaseio.com",
+        projectId: "hackathon-project-85df6",
+        storageBucket: "hackathon-project-85df6.appspot.com",
+        messagingSenderId: "501188007951"
+      };
+      firebase.initializeApp(config);
+    </script>
 
   <!-- The polyfills js is generated during the build process -->
   <script src="build/polyfills.js"></script>
