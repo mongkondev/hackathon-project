@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, AlertController } from 'ionic-angular';
+import { ContactPage } from '../contact/contact';
 
 declare var firebase;
 declare var _;
@@ -15,7 +16,8 @@ export class HomePage {
 
   constructor(
     public navCtrl: NavController,
-    public loadingCtrl: LoadingController
+    public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController
   ) {
 
     this.isLoading = true
@@ -39,6 +41,8 @@ export class HomePage {
           }
         }
 
+        childData._id = childKey
+
         this.items.push(childData)
       });
 
@@ -48,6 +52,23 @@ export class HomePage {
       this.isLoading = false
 
     });
+
+  }
+
+  sendNotify(item){
+
+    var user = firebase.auth().currentUser;
+
+    if(user){
+      this.navCtrl.push(ContactPage, item)
+    }else{
+      let alert = this.alertCtrl.create({
+          title: 'Alert',
+          subTitle: 'Please Sign In',
+          buttons: ['OK']
+      });
+      alert.present();
+    }
 
   }
 

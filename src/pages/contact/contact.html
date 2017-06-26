@@ -3,15 +3,36 @@
     <ion-title>
       Contact
     </ion-title>
+
+    <ion-buttons end>
+        <button ion-button (click)="save()">Send</button>
+    </ion-buttons>
+
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Follow us on Twitter</ion-list-header>
+
     <ion-item>
-      <ion-icon name="ionic" item-left></ion-icon>
-      @ionicframework
+        <ion-label stacked>Name</ion-label>
+        <ion-input type="text" [(ngModel)]="data.name"></ion-input>
     </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Email</ion-label>
+        <ion-input type="text" [(ngModel)]="data.email"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Mobile Phone Number</ion-label>
+        <ion-input type="text" [(ngModel)]="data.mobile_phone"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label stacked>Description</ion-label>
+        <ion-textarea [(ngModel)]="data.description"></ion-textarea>
+    </ion-item>
+
   </ion-list>
 </ion-content>

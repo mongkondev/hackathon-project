@@ -28,6 +28,13 @@ export class MyApp {
         .then(function(currentToken) {
           if (currentToken) {
             console.log('currentToken : ', currentToken);
+            
+            var user = firebase.auth().currentUser;
+            if(user){
+              var userRef = firebase.database().ref('userFcm/' + user.uid)
+              userRef.set(currentToken)
+            }
+
             //sendTokenToServer(currentToken);
             //updateUIForPushEnabled(currentToken);
           } else {

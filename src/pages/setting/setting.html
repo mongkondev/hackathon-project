@@ -20,12 +20,12 @@
   </ion-grid>
 
   <ion-list *ngIf="!showSignInButton">
-    <button ion-item>
+    <!--<button ion-item (click)="showProfile()">
       Profile
-    </button>
-    <button ion-item>
+    </button>-->
+    <button ion-item (click)="showNotifys()">
       Notification
-      <ion-badge item-end>10</ion-badge>
+      <ion-badge item-end *ngIf="notifys.length>0">{{notifys.length}}</ion-badge>
     </button>
     <button ion-item>
       My Product

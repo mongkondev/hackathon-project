@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Notify
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+
+    <ion-item>
+      <h3>Name</h3>
+      <p>{{item.name}}</p>
+    </ion-item>
+
+    <ion-item>
+      <h3>Email</h3>
+      <p>{{item.email}}</p>
+    </ion-item>
+
+    <ion-item>
+      <h3>Mobile Phone Number</h3>
+      <p>{{item.mobile_phone}}</p>
+    </ion-item>
+
+    <ion-item>
+      <h3>Description</h3>
+      <p>{{item.description}}</p>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-card class="product-card" *ngIf="product">
+    <div style="position: relative">
+      <div class="image">
+        <img *ngIf="product.thumbnail" [src]="product.thumbnail">
+      </div>
+      <ion-fab right top  *ngIf="product.latlng">
+        <button ion-fab (click)="openGoogleMap(product)">
+          <ion-icon name="pin"></ion-icon>
+        </button>
+      </ion-fab>
+    </div>
+
+    <ion-item class="detail">
+      <h2>{{item.title}}</h2>
+      <p *ngIf="product.location">{{product.location.district}} {{product.location.province}}</p>
+    </ion-item>
+
+    <ion-item class="detail-footer">
+      <span item-left><p class="price">฿ {{product.price ? numberFormat(product.price) : 'ไม่ระบุ'}}</p></span>
+    </ion-item>
+
+  </ion-card>
+
+</ion-content>
